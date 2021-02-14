@@ -8,6 +8,12 @@ import json
 import markdown
 
 
+def remove_prefix(text: str, prefix: str):
+    if text.startswith(prefix):
+        return text[len(prefix):]
+    return text  # or whatever
+
+
 logging.basicConfig(level=logging.DEBUG)
 _LOGGER = logging.getLogger(__name__)
 
@@ -16,7 +22,7 @@ _LOGGER.info("Starting")
 
 exit_code: int = 0
 post_url: typing.Union[str, None] = None
-tag: str = os.environ.get('GITHUB_REF')
+tag: str = remove_prefix(os.environ.get('GITHUB_REF'), 'refs/tags/')
 repo: str = os.environ.get('GITHUB_REPOSITORY')
 patreon_login: str = sys.argv[1]
 patreon_password: str = sys.argv[2]

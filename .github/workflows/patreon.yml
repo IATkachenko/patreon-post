@@ -11,7 +11,7 @@ jobs:
     name: patreon post
     steps:
       - name: post
-        uses: IATkachenko/patreon-post@v1.1.2
+        uses: IATkachenko/patreon-post@v1.1.3
         with:
           login: ${{ secrets.PATREON_USER }}
           password: ${{ secrets.PATREON_PASSWORD }}
