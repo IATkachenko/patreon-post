@@ -19,13 +19,19 @@ Post url
 
 ## Example usage
 ```yaml
-on
+name: patreon post
+on:
   release:
     types: 
       - 'published'
-   
-uses: IATkachenko/patreon-post@v1
-with:
-  login: 'IATkachenko'
-  password: ${{ secrets.SuperSecretPatreonPassword }} 
+jobs:
+  create_post:
+    runs-on: ubuntu-latest
+    name: patreon post
+    steps:
+      - name: post        
+        uses: IATkachenko/patreon-post@v1
+        with:
+          login: 'IATkachenko'
+          password: ${{ secrets.SuperSecretPatreonPassword }} 
 ```
