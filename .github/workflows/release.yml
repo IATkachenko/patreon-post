@@ -55,6 +55,6 @@ jobs:
         - name: post
           uses: IATkachenko/patreon-post@v1.1.2
           with:
-            login: 'IATkachenko'
+            login: ${{ secrets.PATREON_USER }}
             password: ${{ secrets.PATREON_PASSWORD }}
             body: ${{ needs.changes.outputs.clean_changelog }}
