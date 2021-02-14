@@ -5,6 +5,8 @@ This action create post on your patreon page
 
 You **must** have proxy server with static IP, because patreon require to confirm auth attempt from new device.
 
+You **must** set patreon device id environment variable. While first run via proxy action will failed and show devce id. Save it to secrets and use in future. 
+
 ## Inputs
 
 ### `login`
@@ -44,4 +46,5 @@ jobs:
           password: ${{ secrets.SuperSecretPatreonPassword }} 
         env:
           HTTPS_PROXY: ${{ secrets.HTTPS_PROXY }}
+          PATREON_DEVICE_ID: ${{ secrets.PATREON_DEVICE_ID }}
 ```

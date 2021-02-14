@@ -43,6 +43,9 @@ else:
 _LOGGER.debug('Going to create post "%s"', header)
 
 session = requests.Session()
+
+session.cookies.set('patreon_device_id', os.environ.get('PATREON_DEVICE_ID'))
+
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
                         'Content-Type': 'application/vnd.api+json'
                         })
@@ -50,6 +53,7 @@ session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64;
 response = session.post('https://www.patreon.com/api/login?include=campaign%2Cuser_location&json-api-version=1.0', json={
     "data": {"type": "user", "attributes": {"email": patreon_login, "password": patreon_password},
              "relationships": {}}})
+_LOGGER.info("Device is is %s", session.cookies.get('patreon_device_id'))
 try:
     csrf_token = json.loads(response.content)['meta']['csrf_token']
 except KeyError:
