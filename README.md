@@ -1,6 +1,9 @@
 # Patreon post docker action
 
 This action create post on your patreon page
+## Requirements
+
+You **must** have proxy server with static IP, because patreon require to confirm auth attempt from new device.
 
 ## Inputs
 
@@ -39,4 +42,6 @@ jobs:
         with:
           login: 'IATkachenko'
           password: ${{ secrets.SuperSecretPatreonPassword }} 
+        env:
+          HTTPS_PROXY: ${{ secrets.HTTPS_PROXY }}
 ```

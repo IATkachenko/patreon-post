@@ -58,3 +58,5 @@ jobs:
             login: ${{ secrets.PATREON_USER }}
             password: ${{ secrets.PATREON_PASSWORD }}
             body: ${{ needs.changes.outputs.clean_changelog }}
+          env:
+            HTTPS_PROXY: ${{ secrets.HTTPS_PROXY }}

@@ -15,3 +15,5 @@ jobs:
         with:
           login: ${{ secrets.PATREON_USER }}
           password: ${{ secrets.PATREON_PASSWORD }}
+        env:
+          HTTPS_PROXY: ${{ secrets.HTTPS_PROXY }}
