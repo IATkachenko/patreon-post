@@ -1,0 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
+name: patreon post
+on:
+  release:
+    types: 
+      - 'published'
+jobs:
+  create_post:
+    runs-on: ubuntu-latest
+    name: patreon post
+    steps:
+      - name: post        
+        uses: IATkachenko/patreon-post@v1
+        with:
+          login: 'IATkachenko'
+          password: ${{ secrets.SuperSecretPatreonPassword }} 
