@@ -44,7 +44,12 @@ session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64;
 response = session.post('https://www.patreon.com/api/login?include=campaign%2Cuser_location&json-api-version=1.0', json={
     "data": {"type": "user", "attributes": {"email": patreon_login, "password": patreon_password},
              "relationships": {}}})
-csrf_token = json.loads(response.content)['meta']['csrf_token']
+try:
+    csrf_token = json.loads(response.content)['meta']['csrf_token']
+except KeyError:
+    _LOGGER.critical("csrf token not found in repose")
+    _LOGGER.critical("Response is %s", response.content)
+    exit(1)
 
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
                         'Content-Type': 'application/vnd.api+json',
