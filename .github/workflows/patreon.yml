@@ -14,4 +14,4 @@ jobs:
         uses: IATkachenko/patreon-post@v1
         with:
           login: 'IATkachenko'
-          password: ${{ secrets.SuperSecretPatreonPassword }} 
+          password: ${{ secrets.PATREON_PASSWORD }} 
