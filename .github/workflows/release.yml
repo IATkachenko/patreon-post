@@ -45,3 +45,15 @@ jobs:
         tag_name: ${{ needs.changes.outputs.tag }}
         release_name: ${{ needs.changes.outputs.tag }}
         body: ${{ needs.changes.outputs.clean_changelog }}
+
+  create_post:
+      runs-on: ubuntu-latest
+      name: patreon post
+      if: ${{ needs.changes.outputs.skipped == 'false' }}
+      steps:
+        - name: post
+          uses: IATkachenko/patreon-post@v1.1.0
+          with:
+            login: 'IATkachenko'
+            password: ${{ secrets.PATREON_PASSWORD }}
+            body: ${{ needs.changes.outputs.clean_changelog }}

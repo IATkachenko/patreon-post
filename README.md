@@ -11,6 +11,11 @@ This action create post on your patreon page
 ### `password`
 
 **Required** Password for patreon account. It is recommended to use [github secrets](https://docs.github.com/en/actions/reference/encrypted-secrets). 
+
+### `body`
+
+**Optional** Post body. Must be set if action is used not on "release" trigger
+
 ## Outputs
 
 ### `url`

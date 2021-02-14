@@ -20,16 +20,21 @@ tag: str = os.environ.get('GITHUB_REF')
 repo: str = os.environ.get('GITHUB_REPOSITORY')
 patreon_login: str = sys.argv[1]
 patreon_password: str = sys.argv[2]
+post_body: str = sys.argv[3]
 release_url: str = "%s/%s/releases/tag/%s" % (os.environ.get('GITHUB_SERVER_URL'), repo, tag)
 header: str = 'New release on %s' % repo
-body: str = '###New release on [%s](%s)\n' % (repo, release_url)
-post_text: str = header
 
-g = Github(base_url=os.environ.get('GITHUB_API_URL'))
-repository: Repository = g.get_repo(repo)
-body += repository.get_release(tag).body
+should_generate_body: bool = True if post_body == '' else False
 
-_LOGGER.debug('Going to create post "%s"', post_text)
+if should_generate_body:
+    body: str = '###New release on [%s](%s)\n' % (repo, release_url)
+    g = Github(base_url=os.environ.get('GITHUB_API_URL'))
+    repository: Repository = g.get_repo(repo)
+    body += repository.get_release(tag).body
+else:
+    body = post_body
+
+_LOGGER.debug('Going to create post "%s"', header)
 
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
