@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     name: patreon post
     steps:
-      - name: post        
-        uses: IATkachenko/patreon-post@v1.1.0
+      - name: post
+        uses: IATkachenko/patreon-post@v1.1.1
         with:
           login: 'IATkachenko'
-          password: ${{ secrets.PATREON_PASSWORD }} 
+          password: ${{ secrets.PATREON_PASSWORD }}
