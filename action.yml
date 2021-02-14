@@ -1,0 +1,21 @@
+name: 'patreon post'
+description: 'Publish patreon post'
+inputs:
+  login:
+    description: 'patreon login'
+    required: true
+    default: ''
+  password:
+    description: 'patreon password'
+    required: true
+    default: ''
+
+outputs:
+  url: # id of output
+    description: 'Post url'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.login }}
+    - ${{ inputs.password }}
