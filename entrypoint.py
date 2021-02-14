@@ -28,12 +28,12 @@ patreon_login: str = sys.argv[1]
 patreon_password: str = sys.argv[2]
 post_body: str = sys.argv[3]
 release_url: str = "%s/%s/releases/tag/%s" % (os.environ.get('GITHUB_SERVER_URL'), repo, tag)
-header: str = 'New release on %s' % repo
+header: str = 'New release in %s' % repo
 
 should_generate_body: bool = True if post_body == '' else False
 
 if should_generate_body:
-    body: str = '###New release on [%s](%s)\n' % (repo, release_url)
+    body: str = '###New release in [%s](%s)\n' % (repo, release_url)
     g = Github(base_url=os.environ.get('GITHUB_API_URL'))
     repository: Repository = g.get_repo(repo)
     body += repository.get_release(tag).body
